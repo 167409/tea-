@@ -167,7 +167,8 @@
 
   <div class="add-row">
     <input type="text" id="itemInput" placeholder="e.g. Assam loose leaf" maxlength="60" />
-    <input type="text" id="amountInput" placeholder="Amount" maxlength="20" />
+    <!-- Updated placeholder with ₹ symbol -->
+    <input type="text" id="amountInput" placeholder="₹ Amount" maxlength="20" />
     <button id="addBtn">Add</button>
   </div>
 
@@ -215,7 +216,11 @@ function render(){
     if(item.amount){
       const amount = document.createElement('span');
       amount.className = 'amount';
-      amount.textContent = item.amount;
+      
+      // Automatically prefixes ₹ if the user enters just a number
+      const displayAmount = item.amount.startsWith('₹') ? item.amount : `₹${item.amount}`;
+      amount.textContent = displayAmount;
+      
       li.appendChild(amount);
     }
     li.appendChild(del);
